@@ -1,0 +1,75 @@
+from __future__ import unicode_literals
+import dominate
+from dominate.tags import *
+import datetime
+from dominate.util import *
+import os
+
+folderPath = r"C:\Old Laptop\Pendrive\Laptop\Python Projects\HTML_Tests"
+
+x = datetime.datetime.now()
+time = x.strftime("%x %H:%M:%S")
+
+doc = dominate.document(title=f'HTML {time}')
+
+with doc.head:
+    link(rel='stylesheet', href='style.css')
+    script(type='text/javascript', src='script.js')
+    style("""\
+         body {
+             background-color: #F9F8F1;
+             color: #2C232A;
+             font-family: sans-serif;
+             font-size: 2.6em;
+             margin: 3em 1em;
+         }
+
+     """)
+
+with doc:
+    with div(id='header').add(ol()):
+        html(body(h1(['Test ', span('', id='time')])))
+
+    with div():
+        attr(cls='body')
+
+    with script():
+        raw("""
+            function updateTime() {
+                const now = new Date();
+                const formatted = now.toLocaleString();
+                document.getElementById('time').textContent = formatted;
+            }
+            setInterval(updateTime, 1000);
+            window.onload = updateTime;
+        """)
+
+
+
+time = time.replace("/", "_").replace(":", "-")
+directory = rf"{folderPath}"
+
+try:
+    for file in os.listdir(directory):
+        f = os.path.join(directory, file)
+        if os.path.isfile(f):
+            if time in file:
+                print("The HTML page has already been created recently. Please wait a minute before creating a new one")
+                # exit()
+
+except FileNotFoundError:
+    print("Error while saving '.html' file!")
+    exit()
+
+path = rf"{folderPath}\HTML_test_{time}.html"
+try:
+    htmlFile = open(path, "w", encoding="utf-8")
+    htmlFile.write(str(doc))
+    htmlFile.close()
+except IOError:
+    print("Error while saving '.html' file!")
+    print(f"Check if there is a folder named 'raports' in the path: {folderPath}")
+    print("If it doesn't exist - please create it")
+    exit()
+
+print("Success")
