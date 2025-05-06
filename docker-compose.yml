@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "5000:5000"  # Mapowanie portu 5000 backendu
+    volumes:
+      - ./backend:/app  # Umożliwia edytowanie plików lokalnie
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_RUN_HOST=0.0.0.0
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "80:80"  # Mapowanie portu 80 frontendowego kontenera
+    depends_on:
+      - backend  # Zapewni, że frontend uruchomi się po backendzie

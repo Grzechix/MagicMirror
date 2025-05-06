@@ -1,0 +1,13 @@
+# Pliki wirtualnego środowiska
+venv/
+
+# Pliki IDE
+.vs/
+.vscode/
+
+# Pliki tymczasowe
+__pycache__/
+*.pyc
+
+# Pliki konfiguracyjne z danymi wrażliwymi
+backend/.env
