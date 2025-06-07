@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Set environment variables for Flask (optional)
 # This will make Flask available outside the container
-ENV FLASK_APP=app.py
+ENV FLASK_APP=app
 ENV FLASK_RUN_HOST=0.0.0.0  
 
 # Port on which the Flask application will be available

@@ -4,10 +4,10 @@ services:
       context: ./backend
     ports:
       - "5000:5000"  # Port 5000 backend mapping
-    #volumes:
-    #  - ./backend:/app  # Allows you to edit files locally
+    volumes:
+     - ./backend:/app  # Allows you to edit files locally
     environment:
-      - FLASK_APP=app.py
+      - FLASK_APP=app
       - FLASK_RUN_HOST=0.0.0.0
 
   frontend:
