@@ -4,8 +4,6 @@ services:
       context: ./backend
     ports:
       - "5000:5000"  # Port 5000 backend mapping
-    volumes:
-      - ./backend:/app  # Mount the backend directory to the container
     environment:
       - FLASK_APP=app
       - FLASK_RUN_HOST=0.0.0.0
