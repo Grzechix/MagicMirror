@@ -10,6 +10,8 @@ WORKDIR /app
 COPY . /app
 
 # Install the required libraries
+RUN apt-get update && apt-get install -y tzdata
+ENV TZ=Europe/Warsaw
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Set environment variables for Flask (optional)
