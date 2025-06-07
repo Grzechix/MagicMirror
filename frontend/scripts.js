@@ -1,5 +1,3 @@
-let weatherApiKey = null;
-//let newsApiKey = null;
 
 async function fetchApiKeys() {
     try {
@@ -16,7 +14,8 @@ async function updateTime() {
     try {
         const res = await fetch("http://raspberrypi.local:5000/api/time");
         const data = await res.json();
-        document.getElementById("clock").textContent = data.time;
+        document.getElementById("clock").innerHTML = `${data.hour}:${data.minute}<sup>${data.second}</sup>`;
+        document.getElementById("date").textContent = data.date;
     } catch (error) {
         console.error("Error fetching time:", error);
     }
@@ -26,6 +25,7 @@ async function updateWeather() {
     if (!weatherApiKey) return; // Ensure the API key is available
     const city = "Gliwice";
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApiKey}&units=metric&lang=en`;
+    const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApiKey}&units=metric&lang=pl`;
 
     try {
         const res = await fetch(url);
@@ -40,6 +40,32 @@ async function updateWeather() {
         document.getElementById("weather-icon").src = iconUrl;
         document.getElementById("weather-icon").alt = description;
         document.getElementById("weather-desc").textContent = description;
+
+        try {
+            const res = await fetch(url);
+            const resForecast = await fetch(urlForecast);
+            const data = await res.json();
+            const dataForecast = await resForecast.json();
+
+            // Display weather forecast for the next 3 hours
+            let forecastHtml = "";
+            for (let i = 0; i < 3; i++) {
+                const entry = dataForecast.list[i];
+                const hour = new Date(entry.dt * 1000).getHours();
+                const tempF = Math.round(entry.main.temp);
+                const iconF = entry.weather[0].icon;
+                const iconUrlF = `https://openweathermap.org/img/wn/${iconF}.png`;
+                forecastHtml += `<span style="margin-right:18px;">
+            <img src="${iconUrlF}" alt="" style="width:28px;vertical-align:middle;">
+            <span style="font-weight:500;">${tempF}°C</span>
+            <span style="color:#aaa;font-size:0.9em;">${hour}:00</span>
+        </span>`;
+            }
+            document.getElementById("weather-forecast").innerHTML = forecastHtml;
+        } catch (error) {
+            console.error("Error fetching weather forecast:", error);
+        }
+
     } catch (error) {
         console.error("Error fetching weather:", error);
     }
@@ -70,32 +96,24 @@ async function updateNews() {
     }
 }
 
-function updateDateTime() {
-    const now = new Date();
-    const dateStr = now.toLocaleDateString('pl-PL', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-    const timeStr = now.toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    document.getElementById("date-time").textContent = `${dateStr} ${timeStr}`;
-}
-
 function updateGreeting() {
     const now = new Date();
     const hour = now.getHours();
-    let greeting = "Witaj!";
-    if (hour < 12) greeting = "Dzień dobry!";
-    else if (hour < 18) greeting = "Miłego popołudnia!";
-    else greeting = "Dobry wieczór!";
+    let greeting = "Hello!";
+    if (hour < 12) greeting = "Good morning!";
+    else if (hour < 18) greeting = "Have a nice afternoon!";
+    else greeting = "Good evening!";
     document.getElementById("greeting").textContent = greeting;
 }
 
-// Cytaty motywacyjne
 const quotes = [
-    "Każdy dzień jest nową szansą.",
-    "Uwierz w siebie i działaj!",
-    "Nigdy nie rezygnuj ze swoich marzeń.",
-    "Sukces to suma małych wysiłków powtarzanych codziennie.",
-    "Najlepszy czas na działanie jest teraz.",
-    "Twoje nastawienie decyduje o Twoim sukcesie.",
-    "Nie bój się zmian – to one prowadzą do rozwoju."
+    "Every day is a new opportunity",
+    "Believe in yourself and act!",
+    "Never give up on your dreams.",
+    "Success is the sum of small efforts repeated every day.",
+    "The best time to act is now.",
+    "Your attitude determines your success.",
+    "Don't be afraid of change - it is change that leads to growth."
 ];
 let currentQuote = 0;
 function showQuote() {
@@ -119,12 +137,10 @@ function showQuote() {
     updateNews();
 
     // Nowe funkcje:
-    setInterval(updateDateTime, 1000);
-    updateDateTime();
     setInterval(updateGreeting, 60000);
     updateGreeting();
     showQuote();
-    setInterval(showQuote, 1000 * 60 * 3); // zmiana cytatu co 3 minuty
+    setInterval(showQuote, 1000 * 60 * 3); // Change quote every 3 minutes
 })();
 ///////////////////////////////////////
 
