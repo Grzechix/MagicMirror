@@ -108,8 +108,8 @@ body {
 }
 
 .forecast-icon {
-    width: 28px;
-    height: 28px;
+    width: 1em;
+    height: 1em;
     vertical-align: middle;
     filter: grayscale(0.2) brightness(1.2);
 }
@@ -159,7 +159,7 @@ body {
 /* === NEWS BAR === */
 #news-bar {
     position: absolute;
-    bottom: 30px;
+    bottom: 3vw;
     left: 0;
     width: 100vw;
     text-align: center;
