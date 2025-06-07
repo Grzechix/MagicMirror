@@ -1,24 +1,24 @@
 # Dockerfile for Flask backend
 
-# Używamy oficjalnego obrazu Pythona
+# We are using the official Python image as a base
 FROM python
 
-# Ustalamy katalog roboczy
+# WORKDIR sets the working directory inside the container
 WORKDIR /app
 
-# Kopiujemy pliki z lokalnego katalogu do kontenera
+# Copy files from the local directory to the container
 COPY . /app
 
-# Instalujemy wymagane biblioteki
+# Install the required libraries
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Ustawiamy zmienne środowiskowe dla Flask (optional)
-# Dzięki temu Flask będzie dostępny na zewnątrz kontenera
+# Set environment variables for Flask (optional)
+# This will make Flask available outside the container
 ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0  
 
-# Port, na którym aplikacja Flask będzie dostępna
+# Port on which the Flask application will be available
 EXPOSE 5000
 
-# Uruchamiamy aplikację Flask
+# Start the Flask application
 CMD ["flask", "run"]
