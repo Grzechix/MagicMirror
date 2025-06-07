@@ -8,11 +8,27 @@
     <title>MagicMirror Interface</title>
 </head>
 <body>
-    <div id="clock">--:--:--</div>
-    <div id="greeting">Hello!</div>
-    <div id="weather">Weather: ...</div>
-    <marquee id="news" behavior="scroll" direction="left" scrollamount="10" loop="infinite">
-    
-    </marquee>
+    <div class="top-row">
+        <div class="datetime">
+            <div id="clock" class="big-clock">--:--<sup>--</sup></div>
+            <div id="date" class="date"></div>
+        </div>
+        <div id="weather" class="weather-widget">
+            <div class="weather-main">
+                <span id="weather-temp" class="weather-temp"></span>
+                <img id="weather-icon" class="weather-icon" />
+            </div>
+            <div id="weather-desc" class="weather-desc"></div>
+            <div id="weather-forecast" class="weather-forecast"></div>
+        </div>
+    </div>
+    <div class="center-content">
+        <div id="greeting" class="greeting"></div>
+        <div id="quote" class="quote"></div>
+    </div>
+    <div id="news-bar">
+        <marquee id="news" behavior="scroll" direction="left" scrollamount="10" loop="infinite"></marquee>
+    </div>
+    <script src="scripts.js"></script>
 </body>
 </html>

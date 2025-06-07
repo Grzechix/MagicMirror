@@ -1,7 +1,142 @@
 body {
-    background: black;
-    color: white;
-    font-family: sans-serif;
+    background: #000;
+    color: #fff;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100vw;
+    padding: 40px 60px 0 60px;
+    box-sizing: border-box;
+}
+
+.datetime {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.big-clock {
+    font-size: 7vw;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #fff;
+    line-height: 1;
+}
+
+    .big-clock sup {
+        font-size: 2vw;
+        font-weight: 400;
+        color: #bbb;
+        vertical-align: super;
+        margin-left: 0.2em;
+    }
+
+.date {
+    font-size: 1.7vw;
+    color: #bbb;
+    font-weight: 400;
+    margin-top: 0.5vw;
+    letter-spacing: 0.04em;
+}
+
+.weather-widget {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    min-width: 22vw;
+}
+
+.weather-main {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
+
+.weather-temp {
+    font-size: 4vw;
+    font-weight: 600;
+    color: #fff;
+    margin-right: 0;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
+.weather-icon {
+    width: 20em;
+    height: 20em;
+    filter: grayscale(0.2) brightness(1.8);
+    vertical-align: middle;
+    margin-left: 0;
+}
+
+.weather-desc {
+    font-size: 1.5vw;
+    color: #ccc;
+    font-weight: 400;
+    margin-top: 0.2vw;
+    text-align: left;
+}
+
+.weather-forecast {
+    font-size: 1vw;
+    color: #888;
+    font-weight: 300;
+    margin-top: 0.3vw;
+    text-align: right;
+}
+
+.center-content {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
     text-align: center;
-    font-size: 3em;
+}
+
+.greeting {
+    font-size: 2.5vw;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 1vw;
+}
+
+.quote {
+    font-size: 2vw;
+    color: #e0e0e0;
+    font-style: italic;
+    font-weight: 300;
+    padding: 18px 36px;
+    border-radius: 18px;
+    min-height: 50px;
+    transition: opacity 0.7s;
+    margin-top: 1vw;
+}
+
+#news-bar {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    width: 100vw;
+    text-align: center;
+    z-index: 10;
+}
+
+#news {
+    font-size: 1.5vw;
+    color: #fff;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    padding: 12px 0;
+    border-radius: 10px;
+    display: inline-block;
+    min-width: 60vw;
 }

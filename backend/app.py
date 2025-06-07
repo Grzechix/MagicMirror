@@ -16,7 +16,7 @@ CORS(app)  # Enable CORS
 
 @app.route("/api/time")
 def get_time():
-    now = datetime.datetime.now().strftime("%H:%M:%S")
+    now = datetime.datetime.now().strftime("%H:%M<sup>%S</sup>")
     return jsonify(time=now)
 
 
