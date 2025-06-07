@@ -61,6 +61,7 @@ async function updateNews() {
     try {
         const response = await fetch(url);
         const data = await response.json();
+        console.log("News API response:", data);
 
         const newsMarquee = document.getElementById('news');
         if (!data.articles || data.articles.length === 0) {
