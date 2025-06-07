@@ -7,7 +7,7 @@ services:
     volumes:
       - ./backend:/app  # Allows you to edit files locally
     environment:
-      - FLASK_APP=app.py
+      - FLASK_APP=app
       - FLASK_RUN_HOST=0.0.0.0
 
   frontend:
