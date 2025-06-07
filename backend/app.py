@@ -6,8 +6,6 @@ from dotenv import load_dotenv
 load_dotenv()
 # Ensure that the .env file is in the same directory as this script or provide the path to it
 import os.path
-if not os.path.exists('.env'):
-    raise FileNotFoundError("The .env file is missing. Please create it with the required API keys.")
 import requests
 import xml.etree.ElementTree as ET
 
