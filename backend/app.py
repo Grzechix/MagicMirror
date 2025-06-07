@@ -35,7 +35,7 @@ def get_nyt_news():
 def get_keys():
     return jsonify(
         weather_api_key=os.getenv("WEATHER_API_KEY"),
-        news_api_key=os.getenv("NEWS_API_KEY")
+#        news_api_key=os.getenv("NEWS_API_KEY")
         )
 
 if __name__ == "__main__":
