@@ -55,13 +55,11 @@ async function updateWeather() {
 }
 
 async function updateNews() {
-    if (!newsApiKey) return; // Ensure the API key is available
-    const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${newsApiKey}`;
-
+    const url = "http://raspberrypi.local:5000/api/nyt";
     try {
         const response = await fetch(url);
         const data = await response.json();
-        console.log("News API response:", data);
+        console.log("NYT API response:", data);
 
         const newsMarquee = document.getElementById('news');
         if (!data.articles || data.articles.length === 0) {
@@ -80,6 +78,35 @@ async function updateNews() {
         document.getElementById('news').textContent = 'Failed to load news.';
     }
 }
+
+// This fuctnion is commented out because we need to upgrade plan of NewsAPI (too much informations in use) 
+
+//async function updateNews() {
+//    if (!newsApiKey) return; // Ensure the API key is available
+//    //const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${newsApiKey}`;
+//    const url = `https://rss.nytimes.com/services/xml/rss/nyt/Europe.xml`;
+//    try {
+//        const response = await fetch(url);
+//        const data = await response.json();
+//        console.log("News API response:", data);
+
+//        const newsMarquee = document.getElementById('news');
+//        if (!data.articles || data.articles.length === 0) {
+//            newsMarquee.textContent = 'No news available.';
+//            return;
+//        }
+
+//        const headlines = data.articles
+//            .slice(0, 10)
+//            .map(article => article.title)
+//            .join('  ✦  ');
+
+//        newsMarquee.textContent = headlines;
+//    } catch (error) {
+//        console.error('Error fetching news:', error);
+//        document.getElementById('news').textContent = 'Failed to load news.';
+//    }
+//}
 
 // Najpierw pobierz klucze, potem uruchom resztę
 (async () => {

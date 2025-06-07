@@ -8,6 +8,8 @@ load_dotenv()
 import os.path
 if not os.path.exists('.env'):
     raise FileNotFoundError("The .env file is missing. Please create it with the required API keys.")
+import requests
+import xml.etree.ElementTree as ET
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS
@@ -16,6 +18,18 @@ CORS(app)  # Enable CORS
 def get_time():
     now = datetime.datetime.now().strftime("%H:%M:%S")
     return jsonify(time=now)
+
+
+@app.route("/api/nyt")
+def get_nyt_news():
+    rss_url = "https://rss.nytimes.com/services/xml/rss/nyt/Europe.xml"
+    resp = requests.get(rss_url)
+    root = ET.fromstring(resp.content)
+    items = []
+    for item in root.findall(".//item"):
+        title = item.find("title").text
+        items.append({"title": title})
+    return jsonify(articles=items)
 
 @app.route("/api/keys")
 def get_keys():
