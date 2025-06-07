@@ -3,7 +3,7 @@ let newsApiKey = null;
 
 async function fetchApiKeys() {
     try {
-        const res = await fetch("http://localhost:5000/api/keys");
+        const res = await fetch("http://raspberrypi.local:5000/api/keys");
         const data = await res.json();
         weatherApiKey = data.weather_api_key;
         newsApiKey = data.news_api_key;
@@ -14,7 +14,7 @@ async function fetchApiKeys() {
 
 async function updateTime() {
     try {
-        const res = await fetch("http://localhost:5000/api/time");
+        const res = await fetch("http://raspberrypi.local:5000/api/time");
         const data = await res.json();
         document.getElementById("clock").textContent = data.time;
     } catch (error) {
