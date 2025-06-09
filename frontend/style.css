@@ -93,7 +93,7 @@ body {
     justify-content: flex-end;
     align-items: center;
     gap: 1vw;
-    font-size: 1vw;
+    font-size: 2vw;
     color: #888;
     font-weight: 300;
     margin-top: 0.3vw;
@@ -117,13 +117,13 @@ body {
 .forecast-temp {
     font-weight: 500;
     color: #fff;
-    font-size: 1.2vw;
+    font-size: 2.2vw;
     margin: 0 4px;
 }
 
 .forecast-time {
     color: #aaa;
-    font-size: 0.9vw;
+    font-size: 1.9vw;
     margin-left: 2px;
 }
 
